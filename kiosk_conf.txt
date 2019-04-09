@@ -1,2 +1,0 @@
-kiosk_config=http://192.168.1.164:8000/config/
-disable_firewall=no
