@@ -4,11 +4,6 @@ from django.http import HttpResponse
 from .models import ConfigModel
 
 
-def index(request):
-  content = 'Hello, Kiosk!'
-  return HttpResponse(content=content, content_type='text/plain')
-
-
 def config(request):
   content = 'ERR: no kiosk_config found.'
   
