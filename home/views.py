@@ -21,7 +21,7 @@ def view_presentation(request):
 
 
 def temp(request):
-	obj = GalleryEntry.objects.get(entry_name='Bug')
+	obj = GalleryEntry.objects.get(entry_name='Poroshenko')
 	video = obj.entry_file_url
 	print(video)
 	return render(request, 'home/home.html', {'obj':video})
