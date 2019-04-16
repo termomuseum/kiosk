@@ -36,7 +36,7 @@ def gallery_view_presentation(request, gallery_item_id=None):
 
 
 def temp(request):
-	obj = GalleryEntry.objects.get(entry_name='Poroshenko')
+	obj = GalleryEntry.objects.get(entry_name='Bug')
 	video = obj.entry_file_url
 	print(video)
 	return render(request, 'home/home.html', {'obj':video})
