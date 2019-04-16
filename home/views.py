@@ -18,3 +18,6 @@ def view_video(request):
 def view_presentation(request):
   pass
 
+
+def temp(request):
+	return render(request, 'home/home.html')
