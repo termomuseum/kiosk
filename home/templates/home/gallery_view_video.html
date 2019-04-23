@@ -11,13 +11,10 @@
 
 <body>
 	<video class="video-js" controls data-setup='{}' preload='auto' width="650">
-		<source src='{{ MEDIA_URL }}{{ video_url }}' type='video/mp4'>
+		<source src='{{ MEDIA_URL }}{{ video_url }}' type='video/mp4' codecs="avc1.4D401E, mp4a.40.2">
 	</video>
 
 	<script src='https://vjs.zencdn.net/7.4.1/video.js'></script>
-	<!--<video width='400' controls>
-		<source src='{{ MEDIA_URL }}{{ video_url }}' type='video/mp4'>
-	</video>-->
 
 	
 
