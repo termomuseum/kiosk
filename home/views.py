@@ -4,8 +4,7 @@ from .models import GalleryEntry
 
 
 def index(request):
-  content = 'Hello, Kiosk!'
-  return HttpResponse(content=content, content_type='text/plain')
+  return render(request, 'home/index.html')
 
 
 def gallery_error(message="Error!"):
