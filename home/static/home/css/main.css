@@ -1,0 +1,29 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+
+
+.gallery-image-body {
+
+    background: black;
+    overflow: hidden;
+}
+
+.gallery-image {
+    margin-top: -20px; 
+    width: 100%;
+    height: 768px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.description-block {
+    position: absolute;
+    bottom: -400px;
+    height: 500px;
+    background: rgba(0.0, 0.0, 0.0, 0.5);
+    width: 100%;
+}
+

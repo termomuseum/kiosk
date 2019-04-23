@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +6,32 @@
     <title>Kiosk</title>
 </head>
 <body>
-    <h1>Hello, Kiosk :)</h1>
-    <a href="/view_video/4/">To Video.</a>
+    <h1>Thermometriemuseum Geraberg</h1>
+
+    {% if image_objs.count > 0 %}
+    <h2>Images</h2>
+    {% for obj in image_objs %}
+        <a href="/gallery_view/{{ obj.id }}/">{{ obj.entry_name }}</a>
+        <br>    
+    {% endfor %}
+    {% endif %}
+
+    {% if video_objs.count > 0 %}
+    <h2>Videos</h2>
+    {% for obj in video_objs %}
+        <a href="/gallery_view/{{ obj.id }}/">{{ obj.entry_name }}</a>
+        <br>
+    {% endfor %}
+    {% endif %}
+
+    {% if presentation_objs.count > 0 %}
+    <h2>Presentations</h2>
+    {% for obj in presentation_objs %}
+        <a href="/gallery_view/{{ obj.id }}/">{{ obj.entry_name }}</a>
+        <br>
+    {% endfor %}
+    {% endif %}
+
+
 </body>
 </html>
