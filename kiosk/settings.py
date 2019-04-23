@@ -26,9 +26,9 @@ SECRET_KEY = '0(gw=+33pis%0zn(heam4pf8^^pr-29)qud#^&p770&@b=zcwn'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '127.0.0.1',
     'localhost',
-    '192.168.1.164'
+    '127.0.0.1',
+    '192.168.1.85',
 ]
 
 
@@ -129,3 +129,11 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+### alsamixer commands
+# touch /etc/asound.conf &
+# printf "defaults.pcm.card 1\ndefaults.ctl.card 1\n" > /etc/asound.conf &
+# amixer sset Master unmute &
+# amixer sset Master 100%
+
