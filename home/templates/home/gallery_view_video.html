@@ -6,19 +6,23 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Kiosk // {{ video_name }}</title>
-	<link rel="stylesheet" type="text/css" href="{% static 'home/css/video-js.css' %}">
+	<link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{% static 'home/css/video-js.css' %}">
+	<link rel="stylesheet" href="{% static 'home/css/main.css' %}">
 </head>
 
 <body>
-	<video class="video-js" controls data-setup='{}' preload='auto' width="650">
+	<video class="video-js gallery-video" controls data-setup='{}' width='100%' preload='auto'>
 		<source src='{{ MEDIA_URL }}{{ video_url }}' type='video/mp4' codecs="avc1.4D401E, mp4a.40.2">
 	</video>
-
 	<script src='https://vjs.zencdn.net/7.4.1/video.js'></script>
 	<embed src="{{ MEDIA_URL }}{{ video_url }}" type="application/pdf" width="100%" height="600px" />
 {# 	<a href="{{ MEDIA_URL }}{{ video_url}}">sdsd</a>
 	<a href="/">Back to home</a>
 	<a href="https://www.youtube.com/watch?v=C29IvglSGX0">YouTube video :)</a> #}
+	<!--<script src='https://vjs.zencdn.net/7.4.1/video.js'></script>-->
+	
+	<a href="/">Back</a>
 </body>
 
 </html>
