@@ -33,9 +33,3 @@ def gallery_view_image(request, gallery_item_id=None):
 def gallery_view_presentation(request, gallery_item_id=None):
   pass
 
-
-def temp(request):
-	obj = GalleryEntry.objects.get(entry_name='Poroshenko')
-	video = obj.entry_file_url
-	print(video)
-	return render(request, 'home/home.html', {'obj':video})
