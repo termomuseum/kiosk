@@ -59,5 +59,11 @@ def gallery_view_image(request, image_obj=None):
 
 
 def gallery_view_presentation(request, presentation_obj=None):
-  return HttpResponse(content=presentation_obj.entry_name, content_type='text/plain')
+  context = {
+    'presentation_name':presentation_obj.entry_name,
+    'presentation_url':presentation_obj.entry_file_url,
+    'presentation_desc':presentation_obj.entry_desc,
+    'presentation_desc_full':presentation_obj.entry_desc_full,
+  }
+  return render(request, 'home/gallery_view_presentation.html', context=context)
 
