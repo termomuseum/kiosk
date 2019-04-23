@@ -11,12 +11,25 @@ def gallery_error(message="Error!"):
   return HttpResponse(content=message, content_type='text/plain')
 
 
-def gallery_view_video(request, gallery_item_id=None):
+def gallery_view(request, gallery_item_id=None):
   if gallery_item_id == None:
     return gallery_error("Error! No `gallery_item_id` given.")
 
-  video_obj = GalleryEntry.objects.get(id=gallery_item_id)
+  gallery_obj = GalleryEntry.objects.get(id=gallery_item_id)
+  gallery_obj_type = gallery_obj.entry_type.type_name
 
+  if gallery_obj_type == 'Video':
+    return gallery_view_video(request, gallery_obj)
+  elif gallery_obj_type == 'Presentation':
+    return gallery_view_presentation(request, gallery_obj)
+  elif gallery_obj_type == 'Image':
+    return gallery_view_image(request, gallery_obj)
+  else:
+    return gallery_error('Error! Type ' + gallery_obj_type + ' is not usable.')
+
+
+
+def gallery_view_video(request, video_obj=None):
   context = {
     'video_name': video_obj.entry_name,
     'video_url': video_obj.entry_file_url,
@@ -25,13 +38,12 @@ def gallery_view_video(request, gallery_item_id=None):
   return render(request, 'home/gallery_view_video.html', context=context)
   
 
+def gallery_view_image(request, image_obj=None):
+  return HttpResponse(content=image_obj.entry_name, content_type='text/plain')
 
-def gallery_view_image(request, gallery_item_id=None):
-  pass
 
-
-def gallery_view_presentation(request, gallery_item_id=None):
-  pass
+def gallery_view_presentation(request, presentation_obj=None):
+  return HttpResponse(content=presentation_obj.entry_name, content_type='text/plain')
 
 
 def temp(request):
