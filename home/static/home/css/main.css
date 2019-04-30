@@ -1,11 +1,10 @@
-body {
-    padding: 0;
+/*body {
+    padding: 50px;
     margin: 0;
-}
+}*/
 
 
 .gallery-image-body {
-
     background: black;
     overflow: hidden;
 }
@@ -27,4 +26,7 @@ body {
     width: 100%;
 }
 
+.col-md-4 {
+    margin-bottom: 20px;
+}
 
