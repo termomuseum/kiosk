@@ -20,35 +20,6 @@ def index(request, args=None):
   # Rendering view
   return render(request, 'home/index.html', context=context)
 
-
-# Display an error when something's not right
-def gallery_error(message="Error!"):
-  return HttpResponse(content=message, content_type='text/plain')
-
-
-# Main gallery view function, to view gallery items
-# Directs to three other views depending on a entry type
-# (Image, Video or Presentation)
-def gallery_view(request, gallery_item_id=None):
-  if gallery_item_id == None:
-    return gallery_error("Error! No `gallery_item_id` given.")
-
-  # Getting selected gallery object and its type
-  gallery_obj = GalleryEntry.objects.get(id=gallery_item_id)
-  gallery_obj_type = gallery_obj.entry_type.type_name
-
-  # Directing to another view depending on the type
-  if gallery_obj_type == 'Video':
-    return gallery_view_video(request, gallery_obj)
-  elif gallery_obj_type == 'Presentation':
-    return gallery_view_presentation(request, gallery_obj)
-  elif gallery_obj_type == 'Image':
-    return gallery_view_image(request, gallery_obj)
-  else:
-    # If there was other unexpected type, we throw an error
-    return gallery_error('Error! Type ' + gallery_obj_type + ' is not usable.')
-
-
 # Video gallery view
 def gallery_video(request, pk=None):
   if pk!=None:
