@@ -1,11 +1,10 @@
-body {
-    padding: 0;
+/*body {
+    padding: 50px;
     margin: 0;
-}
+}*/
 
 
 .gallery-image-body {
-
     background: black;
     overflow: hidden;
 }
@@ -25,5 +24,9 @@ body {
     height: 500px;
     background: rgba(0.0, 0.0, 0.0, 0.5);
     width: 100%;
+}
+
+.col-md-4 {
+    margin-bottom: 20px;
 }
 
