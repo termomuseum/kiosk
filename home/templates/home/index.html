@@ -6,51 +6,32 @@
     <title>Kiosk</title>
     <link rel="stylesheet" href="{% static 'home/css/main.css' %}">
     <link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=ZCOOL+KuaiLe" rel="stylesheet">
 </head>
 <body>
     <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-3">
 
         </div>
         
-        <div class="col-sm-8">
+        <div class="col-sm-9">
             <h1>Thermometriemuseum Geraberg</h1>
-
-            {% if image_objs.count > 0 %}
-            <h2>Images</h2>
-            {% for obj in image_objs %}
-                <a href="/gallery_view/{{ obj.id }}/">{{ obj.entry_name }}</a>
-                <br>    
-            {% endfor %}
-            {% endif %}
-
-            {% if video_objs.count > 0 %}
-            <h2>Videos</h2>
-            <div class="row">
-                {% for obj in video_objs %}
-                    <div class="col-md-4">
-                        <div class="card" style="width: 18rem;">
-                            <a href="/gallery_view/{{ obj.id }}/">
-                                <img src="{% static 'home/img/test.png' %}" class="card-img-top" alt="...">
-                            </a>
-                            <div class="card-body">
-                                <h5 class="card-title">{{ obj.entry_name }}</h5>
-                                <a href="/gallery_view/{{ obj.id }}/" class="btn btn-primary">View</a>
-                            </div>
-                        </div>
-                        <!--<a href="/gallery_view/{{ obj.id }}/"></a>-->
-                    </div>
-                {% endfor %}  
+            <div class="row gallery">   
+                <div class="col-sm-3 text-center">
+                        <img src="/media/videofolder.png" alt=""> <br>  
+                        <a href="{% url 'home:video_view' %}"><h4>Videos</h4></a>
+                </div>
+                <div class="col-sm-3 text-center">
+                        <img src="/media/imagefolder.png" alt=""> <br>  
+                        <a href="{% url 'home:image_view' %}"><h4>Images</h4></a>
+                </div>
+                <div class="col-sm-3 text-center">
+                        <img src="/media/presentationfolder.png" alt=""> <br>  
+                        <a href="{% url 'home:presentation_view' %}"><h4>Presentations</h4></a>
+                </div>
+                
             </div>
-            {% endif %}
 
-            {% if presentation_objs.count > 0 %}
-            <h2>Presentations</h2>
-            {% for obj in presentation_objs %}
-                <a href="/gallery_view/{{ obj.id }}/">{{ obj.entry_name }}</a>
-                <br>
-            {% endfor %}
-            {% endif %}
         </div>
     </div>
 </body>

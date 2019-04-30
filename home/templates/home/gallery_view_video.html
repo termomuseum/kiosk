@@ -12,9 +12,38 @@
 </head>
 
 <body>
-	<video class="video-js gallery-video" controls data-setup='{}' width="1280" preload='auto'>
-		<source src='{{ MEDIA_URL }}{{ video_url }}' type='video/mp4' codecs="avc1.4D401E, mp4a.40.2">
-	</video>
+	{% if not video_view %}
+		{% for video in videos %}
+			<div class="card" style="width: 18rem;">
+		            <a href="/gallery_view/{{ obj.id }}/">
+		                <video class="video-js card-img-top" data-setup='{}'>
+		                	<source src='../media/Poroshenko.mp4' type='video/mp4' codecs="avc1.4D401E, mp4a.40.2">
+						</video>
+		            </a>
+		            <div class="card-body">
+		                <h5 class="card-title">{{ video.entry_name }}</h5>
+		                <a href="{% url 'home:video' video.id %}" class="btn btn-primary">View</a>
+		            </div>
+			</div>
+		{% endfor %}
+	{% else %}
+		<video class="video-js gallery-video" controls data-setup='{}' width="1280" preload='auto'>
+			<source src='{{ MEDIA_URL }}{{ video_view }}' type='video/mp4' codecs="avc1.4D401E, mp4a.40.2">
+		</video>
+	{% endif %}
+
+		
+<!-- 		<h1>dasds</h1>
+		<div class="card" style="width: 18rem;">
+            <a href="/gallery_view/{{ obj.id }}/">
+                <img src="{% static 'home/img/test.png' %}" class="card-img-top" alt="...">
+            </a>
+            <div class="card-body">
+                <h5 class="card-title">{{ obj.entry_name }}</h5>
+                <a href="/gallery_view/{{ obj.id }}/" class="btn btn-primary">View</a>
+            </div>
+		</div> -->
+
 	<script src='https://vjs.zencdn.net/7.4.1/video.js'></script>
 	
 	<a href="/">Back</a>

@@ -9,16 +9,31 @@
 	<link rel="stylesheet" href="{% static 'home/css/main.css' %}">
 </head>
 
-<body class='gallery-image-body'>
-    <div class='gallery-image' style='background-image: url({{ MEDIA_URL }}{{ image_url }});'>
-    </div> 
-    <br>
-    <div class="description-block">
-        <a href="/" style="color: white;">Back</a>
+<body >
+    {% if not image_view  %}
+
+        {% for image in images %}
+            <div class="card" style="width: 18rem;">
+                <a href="{% url 'home:image' image.id %}">
+                    <img src="{{ MEDIA_URL }}{{ image.entry_file_url }}" class="card-img-top" alt="...">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">{{ image.entry_name }}</h5>
+                    <a href="{% url 'home:image' image.id %}" class="btn btn-primary">View</a>
+                </div>
+            </div> 
+        {% endfor %}
+    {% else %}
+        <div class='gallery-image' style='background-image: url({{ MEDIA_URL }}{{ image_view.entry_file_url }});'>
+        </div> 
         <br>
-        <p style="color: white;">{{ image_desc }}</p>
-        <p style="color: white;">{{ image_desc_full }}</p>
-    </div>
+        <div class="description-block">
+            <a href="/" style="color: white;">Back</a>
+            <br>
+            <p style="color: white;">{{ image_view.entry_desc }}</p>
+            <p style="color: white;">{{ image_view.entry_desc_full }}</p>
+        </div>
+    {% endif %}
 </body>
 
 </html>

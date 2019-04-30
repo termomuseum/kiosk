@@ -9,8 +9,22 @@
 	<link rel="stylesheet" href="{% static 'home/css/main.css' %}">
 </head>
 <body>
+	{% if not presentation_view %}
+		{% for presentation in presentations  %}
+			<div class="card" style="width: 18rem;">
+                <a href="{% url 'home:presentation' presentation.id %}">
+                    <img src="../media/Presentationicon.png" class="card-img-top" alt="...">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">{{ presentation.entry_name }}</h5>
+                    <a href="{% url 'home:presentation' presentation.id %}" class="btn btn-primary">View</a>
+                </div>
+            </div> 
+		{% endfor %}
+	{% else %}
 	<div class="presentation">
-		<embed src="{{ MEDIA_URL }}{{ presentation_url}}" type="application/pdf" width="100%" height="1000px" />
+		<embed src="{{ MEDIA_URL }}{{ presentation_view.entry_file_url}}" type="application/pdf" width="100%" height="1000px" />
 	</div>
+	{% endif %}
 </body>
 </html>

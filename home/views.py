@@ -50,36 +50,45 @@ def gallery_view(request, gallery_item_id=None):
 
 
 # Video gallery view
-def gallery_view_video(request, video_obj=None):
-  context = {
-    'video_name': video_obj.entry_name,
-    'video_url': video_obj.entry_file_url,
-    'video_desc': video_obj.entry_desc,
-  }
-  # Rendering view
-  return render(request, 'home/gallery_view_video.html', context=context)
+def gallery_video(request, pk=None):
+  if pk!=None:
+      video_obj = GalleryEntry.objects.get(id=pk)
+      context = {'video_view':video_obj.entry_file_url}
+      # Rendering view
+      return render(request, 'home/gallery_view_video.html', context=context)
+  else:
+      objects = GalleryEntry.objects.filter(entry_type__type_name='Video')
+      context =  {'videos':objects}
+      print(context)
+      # Rendering view
+      return render(request, 'home/gallery_view_video.html', context=context)
+
   
 
 # Image gallery view
-def gallery_view_image(request, image_obj=None):
-  context = {
-    'image_name': image_obj.entry_name,
-    'image_url': image_obj.entry_file_url,
-    'image_desc': image_obj.entry_desc,
-    'image_desc_full': image_obj.entry_desc_full,
-  }
-  # Rendering view
-  return render(request, 'home/gallery_view_image.html', context=context)
+def gallery_image(request, pk=None):
+  if pk!=None:
+      image_obj = GalleryEntry.objects.get(id=pk)
+      context = {'image_view':image_obj}
+      # Rendering view
+      return render(request, 'home/gallery_view_image.html', context=context)
+  else:
+      objects = GalleryEntry.objects.filter(entry_type__type_name='Image')
+      context = {'images':objects}
+      # Rendering view
+      return render(request, 'home/gallery_view_image.html', context=context)
 
 
 # Presentation gallery view
-def gallery_view_presentation(request, presentation_obj=None):
-  context = {
-    'presentation_name':presentation_obj.entry_name,
-    'presentation_url':presentation_obj.entry_file_url,
-    'presentation_desc':presentation_obj.entry_desc,
-    'presentation_desc_full':presentation_obj.entry_desc_full,
-  }
-  # Rendering view
-  return render(request, 'home/gallery_view_presentation.html', context=context)
+def gallery_presentation(request, pk=None):
+  if pk!=None:
+      presentation_obj = GalleryEntry.objects.get(id=pk)
+      context = {'presentation_view':presentation_obj}
+      # Rendering view
+      return render(request, 'home/gallery_view_presentation.html', context=context)
+  else:
+      objects = GalleryEntry.objects.filter(entry_type__type_name='Presentation')
+      context = {'presentations':objects}
+      # Rendering view
+      return render(request, 'home/gallery_view_presentation.html', context=context)
 

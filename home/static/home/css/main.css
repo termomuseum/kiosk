@@ -30,3 +30,17 @@
     margin-bottom: 20px;
 }
 
+.gallery {
+    font-family: 'ZCOOL KuaiLe', cursive;
+}
+
+.gallery a {
+    display: block;
+    text-decoration: none;
+    color: black;
+}
+
+.gallery a:hover {
+    text-decoration: none;
+    color:lightblue;
+}
