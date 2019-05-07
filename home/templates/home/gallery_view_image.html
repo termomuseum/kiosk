@@ -37,7 +37,7 @@
         </div> 
         <br>
         <div class="description-block">
-            <a href="/" style="color: white;">Back</a>
+            <a href="{% url 'home:image_view' %}" style="color: white;">Back</a>
             <br>
             <p style="color: white;">{{ image_view.entry_desc }}</p>
             <p style="color: white;">{{ image_view.entry_desc_full }}</p>
