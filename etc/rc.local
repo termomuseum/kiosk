@@ -1,0 +1,45 @@
+#!/bin/sh -e
+#
+# rc.local
+#
+# This script is executed at the end of each multiuser runlevel.
+# Make sure that the script will "exit 0" on success or any other
+# value on error.
+#
+# In order to enable or disable this script just change the execution
+# bits.
+#
+# By default this script does nothing.
+
+# Print the IP address
+_IP=$(hostname -I) || true
+if [ "$_IP" ]; then
+  printf "My IP address is %s\n" "$_IP"
+fi
+
+# sleeping to let other services to initialize
+# e.g. NetworkManager
+sleep 10 
+
+# updating 'kiosk' from https://github.com/thermometer/kiosk 'master' branch
+cd /home/pi/Dev
+if test -f update; then 
+	mv kiosk/db.sqlite3 db.sqlite3
+	rm -r kiosk
+	git clone https://github.com/termomuseum/kiosk
+	mv db.sqlite3 kiosk/db.sqlite3
+fi
+
+# mouning HDD to server's MEDIA_ROOT folder
+mkdir /home/pi/Dev/kiosk/media
+mount -t exfat /dev/sda1 /home/pi/Dev/kiosk/media
+
+# running a server adn migrating changes to a database
+cd /home/pi/Dev/kiosk
+python3 --version
+python3 manage.py makemigrations
+python3 manage.py makemigrations home
+python3 manage.py migrate
+(python3 manage.py runserver 0.0.0.0:8000) &
+
+exit 0
