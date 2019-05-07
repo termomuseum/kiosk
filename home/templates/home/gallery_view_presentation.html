@@ -23,7 +23,7 @@
 		{% for presentation in presentations  %}
 			<div class="card" style="width: 18rem;">
                 <a href="{% url 'home:presentation' presentation.id %}">
-                    <img src="../media/Presentationicon.png" class="card-img-top" alt="...">
+                    <img src="{% static 'home/img/Presentationicon.png' %}" class="card-img-top" alt="...">
                 </a>
                 <div class="card-body">
                     <h5 class="card-title">{{ presentation.entry_name }}</h5>
