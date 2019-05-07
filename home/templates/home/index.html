@@ -18,15 +18,15 @@
             <h1>Thermometriemuseum Geraberg</h1>
             <div class="row gallery justify-content-start">   
                 <div class="text-center">
-                        <img src="/media/videofolder.png" alt=""> <br>  
+                        <img src="{% static 'home/img/videofolder.png' %}" alt=""> <br>  
                         <a href="{% url 'home:video_view' %}"><h4>Videos</h4></a>
                 </div>
                 <div class="text-center">
-                        <img src="/media/imagefolder.png" alt=""> <br>  
+                        <img src="{% static 'home/img/imagefolder.png' %}" alt=""> <br>  
                         <a href="{% url 'home:image_view' %}"><h4>Images</h4></a>
                 </div>
                 <div class="text-center">
-                        <img src="/media/presentationfolder.png" alt=""> <br>  
+                        <img src="{% static 'home/img/presentationfolder.png' %}" alt=""> <br>  
                         <a href="{% url 'home:presentation_view' %}"><h4>Presentations</h4></a>
                 </div>
                 
