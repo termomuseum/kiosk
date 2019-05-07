@@ -31,7 +31,7 @@ class GalleryEntryCategory(models.Model):
 # TODO: Add entry_category
 class GalleryEntry(models.Model):
   entry_type = models.ForeignKey(GalleryEntryType, on_delete=models.CASCADE, verbose_name="Type")
-  entry_category = models.ForeignKey(GalleryEntryCategory, default=None, on_delete=models.CASCADE, verbose_name="Category")
+  entry_category = models.ForeignKey(GalleryEntryCategory, default=None, null=True, blank=True, on_delete=models.CASCADE, verbose_name="Category")
   entry_name = models.CharField(default="", max_length=100, verbose_name="Name")
   entry_file_url = models.FileField(default="", verbose_name="File")
   entry_desc = models.TextField(default="", verbose_name="Description")
