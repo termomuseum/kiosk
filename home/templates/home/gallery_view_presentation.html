@@ -33,6 +33,9 @@
 		{% endfor %}
 	{% else %}
 	<div class="presentation">
+        <nav class="navbar fixed-top navbar-light bg-light" style="width:100px;z-index:5;">
+            <a href="{% url 'home:presentation_view' %}" class="navbar-brand" href="#">Back</a>
+        </nav>
 		<embed src="{{ MEDIA_URL }}{{ presentation_view.entry_file_url}}" type="application/pdf" width="100%" height="1000px" />
 	</div>
 </div>
