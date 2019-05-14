@@ -37,6 +37,7 @@
 			</div>
 		{% endfor %}
 	{% else %}
+    	<a onclick="history.back()" class="fixed-top btn btn-primary btn-lg" style="width:100px;" href="#">Back</a>
 		<video class="video-js gallery-video" controls data-setup='{}' width="1280" preload='auto'>
 			<source src='{{ MEDIA_URL }}{{ video_view }}' type='video/mp4' codecs="avc1.4D401E, mp4a.40.2">
 		</video>
