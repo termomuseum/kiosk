@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kiosk</title>
+    <link rel="stylesheet" href="{% static 'home/css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}">
+</head>
+<body>
+    <div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+
+        </div>
+        <div class="col-sm-9 ">
+            <h1>Thermometriemuseum Geraberg</h1>
+            <h3>{{ category_name }}</h3>
+
+            
+            {% if video_len > 0 %}
+            <h4>Videos</h4>
+            {% for obj in video_objects %}
+            <a href="{% url 'home:video' obj.id %}"><p>{{ obj.entry_name }}</p></a>  
+            {% endfor %}
+            {% endif %}
+
+            {% if image_len > 0 %}
+            <h4>Images</h4>
+            {% for obj in image_objects %}
+            <a href="{% url 'home:image' obj.id %}"><p>{{ obj.entry_name }}</p></a>  
+            {% endfor %}
+            {% endif %}
+            
+            {% if presentation_len > 0 %}
+            <h4>Presentations</h4>
+            {% for obj in presentation_objects %}
+            <a href="{% url 'home:presentation' obj.id %}"><p>{{ obj.entry_name }}</p></a>  
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+</body>
+</html>

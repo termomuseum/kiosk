@@ -16,6 +16,8 @@
         </div>
         <div class="col-sm-9 ">
             <h1>Thermometriemuseum Geraberg</h1>
+            
+            <!--
             <div class="row gallery justify-content-start">   
                 <div class="text-center">
                         <img src="{% static 'home/img/videofolder.png' %}" alt=""> <br>  
@@ -28,9 +30,14 @@
                 <div class="text-center">
                         <img src="{% static 'home/img/presentationfolder.png' %}" alt=""> <br>  
                         <a href="{% url 'home:presentation_view' %}"><h4>Presentations</h4></a>
-                </div>
-                
+                </div> 
             </div>
+            --> 
+
+            {% for cat in categories %}
+              <a href="{% url 'home:category_view' cat.id %}">{{ cat.category_name }}</a>
+              <br>
+            {% endfor %}
 
         </div>
     </div>
