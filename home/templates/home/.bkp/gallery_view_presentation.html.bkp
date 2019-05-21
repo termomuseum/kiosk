@@ -1,0 +1,48 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>{{ presentation.name }}</title>
+	<link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{% static 'home/css/main.css' %}">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+<body onLoad="HandTool.toogle()">
+	{% if not presentation_view %}
+		<div class="container">
+            <div class="row">
+                <div class="col-sm-2 d-flex align-items-center justify-content-center">
+                    <a href="{% url 'home:index' %}"><i class="fas fa-chevron-circle-left" style="color:red;font-size:50px"></i></a>
+                </div>
+                <div class="col-sm-10 d-flex justify-content-around">   
+                    <img src="{% static 'home/img/presentationfolder.png' %}" alt=""> <br> 
+                </div>
+            </div>
+        <div class="row justify-content-around">  
+    		{% for presentation in presentations  %}
+                <div class="col-sm-3 m-3">  
+                    <div class="card" style="width: 18rem;">
+                        <a href="{% url 'home:presentation' presentation.id %}">
+                            <img src="{% static 'home/img/Presentationicon.png' %}" class="card-img-top" alt="...">
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ presentation.entry_name }}</h5>
+                            <a href="{% url 'home:presentation' presentation.id %}" class="btn btn-primary">View</a>
+                        </div>
+                    </div>
+                </div>
+             {% endfor %}
+        </div>
+
+		
+	{% else %}
+	<div class="presentation">
+        <a onclick="history.back()" class="fixed-top btn btn-primary btn-lg" style="width:100px;" href="#">Back</a> 
+		<embed src="{{ MEDIA_URL }}{{ presentation_view.entry_file_url}}" type="application/pdf" style="height:100vh;width:100%;" />
+	</div>
+</div>
+	{% endif %}
+</body>
+</html>

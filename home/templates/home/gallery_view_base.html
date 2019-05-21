@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Kiosk</title>
+  <link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'home/css/video-js.css' %}">
+  <link rel="stylesheet" href="{% static 'home/css/main.css' %}">
+</head>
+<body class="dragscroll">
+
+  <a onclick="history.back()" class="{% block back-btn-disable %}{% endblock %} fixed-top btn btn-primary btn-lg" style="width:100px;" href="#">
+    {% block back-btn-text %}Back{% endblock %}
+  </a>
+
+  {% block content %}
+  No content here.
+  {% endblock %}
+  
+  <!-- JS scripts -->
+  <script src="{% static 'home/js/video.js' %}"></script>
+  <script src="{% static 'home/js/dragscroll.js' %}"></script>
+  <script src="{% static 'home/js/main.js' %}"></script>
+
+</body>
+</html>

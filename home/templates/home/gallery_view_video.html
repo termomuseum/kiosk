@@ -1,64 +1,7 @@
-{% load static %}
+{% extends 'home/gallery_view_base.html' %}
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-	<meta charset="UTF-8">
-	<title>Kiosk // {{ video_name }}</title>
-	<link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}">
-	<link rel="stylesheet" href="{% static 'home/css/video-js.css' %}">
-	<link rel="stylesheet" href="{% static 'home/css/main.css' %}">
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-</head>
-
-<body>
-	{% if not video_view %}
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-2 d-flex align-items-center">
-					<a href="{% url 'home:index' %}"><i class="fas fa-chevron-circle-left" style="color:red;font-size:30px"></i></a>
-            	</div>
-            	<div class="col-sm-10 d-flex justify-content-around">	
-					<img src="{% static 'home/img/videofolder.png' %}" alt=""> <br> 
-            	</div>
-			</div>
-		{% for video in videos %}
-			<div class="card" style="width: 18rem;">
-		            <a href="/gallery_view/{{ obj.id }}/">
-		                <video class="video-js card-img-top" data-setup='{}'>
-		                	<source src='../media/Poroshenko.mp4' type='video/mp4' codecs="avc1.4D401E, mp4a.40.2">
-						</video>
-		            </a>
-		            <div class="card-body">
-		                <h5 class="card-title">{{ video.entry_name }}</h5>
-		                <a href="{% url 'home:video' video.id %}" class="btn btn-primary">View</a>
-		            </div>
-			</div>
-		{% endfor %}
-	{% else %}
-    	<a onclick="history.back()" class="fixed-top btn btn-primary btn-lg" style="width:100px;" href="#">Back</a>
-		<video class="video-js gallery-video" controls data-setup='{}' width="1280" preload='auto'>
-			<source src='{{ MEDIA_URL }}{{ video_view }}' type='video/mp4' codecs="avc1.4D401E, mp4a.40.2">
-		</video>
-	</div>
-	{% endif %}
-
-		
-<!-- 		<h1>dasds</h1>
-		<div class="card" style="width: 18rem;">
-            <a href="/gallery_view/{{ obj.id }}/">
-                <img src="{% static 'home/img/test.png' %}" class="card-img-top" alt="...">
-            </a>
-            <div class="card-body">
-                <h5 class="card-title">{{ obj.entry_name }}</h5>
-                <a href="/gallery_view/{{ obj.id }}/" class="btn btn-primary">View</a>
-            </div>
-		</div> -->
-
-	<script src='https://vjs.zencdn.net/7.4.1/video.js'></script>
-	
-	<a href="/">Back</a>
-</body>
-
-</html>
+{% block content %}
+  <video class="video-js gallery-video" controls data-setup='{}' width="1280" preload='auto'>
+    <source src='{{ MEDIA_URL }}{{ video_view }}' type='video/mp4' codecs="avc1.4D401E, mp4a.40.2">
+  </video>
+{% endblock %}

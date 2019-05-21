@@ -1,46 +1,16 @@
+{% extends 'home/base.html' %}
+
+{% block title %}Thermometriemuseum Geraberg{% endblock %}
+{% block subtitle %}{% endblock %}
+
+{% block back-btn-text %}Disabled{% endblock %}
+{% block back-btn-disable %}disable{% endblock %}
+
+{% block content %}
+  {% for cat in categories %}
+  <a href="{% url 'home:category_view' cat.id %}">{{ cat.category_name }}</a>
+  <br>
+  {% endfor %}
+{% endblock %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Kiosk</title>
-    <link rel="stylesheet" href="{% static 'home/css/main.css' %}">
-    <link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}">
-    <link href="https://fonts.googleapis.com/css?family=ZCOOL+KuaiLe" rel="stylesheet">
-</head>
-<body>
-    <div class="container">
-    <div class="row">
-        <div class="col-sm-3">
 
-        </div>
-        <div class="col-sm-9 ">
-            <h1>Thermometriemuseum Geraberg</h1>
-            
-            <!--
-            <div class="row gallery justify-content-start">   
-                <div class="text-center">
-                        <img src="{% static 'home/img/videofolder.png' %}" alt=""> <br>  
-                        <a href="{% url 'home:video_view' %}"><h4>Videos</h4></a>
-                </div>
-                <div class="text-center">
-                        <img src="{% static 'home/img/imagefolder.png' %}" alt=""> <br>  
-                        <a href="{% url 'home:image_view' %}"><h4>Images</h4></a>
-                </div>
-                <div class="text-center">
-                        <img src="{% static 'home/img/presentationfolder.png' %}" alt=""> <br>  
-                        <a href="{% url 'home:presentation_view' %}"><h4>Presentations</h4></a>
-                </div> 
-            </div>
-            --> 
-
-            {% for cat in categories %}
-              <a href="{% url 'home:category_view' cat.id %}">{{ cat.category_name }}</a>
-              <br>
-            {% endfor %}
-
-        </div>
-    </div>
-</div>
-</body>
-</html>

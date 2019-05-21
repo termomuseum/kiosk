@@ -44,3 +44,14 @@
     text-decoration: none;
     color:lightblue;
 }
+
+/* Drag Scroll */
+.dragscroll {
+  height: 100vh;
+  overflow: auto;
+}
+
+/* Disables an element */
+.disable {
+  display: none !important;
+}
