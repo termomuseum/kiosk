@@ -83,7 +83,7 @@ def gallery_presentation(request, pk=None):
       presentation_obj = GalleryEntry.objects.get(id=pk)
 
       count = 1
-      ratio_px = 1125 
+      ratio_px = 2500 
 
       filename = 'media/' + presentation_obj.entry_file_url.name
       with open(filename, 'rb') as f:

@@ -10,6 +10,11 @@
 </head>
 <body class="dragscroll">
 
+  <!-- JS scripts -->
+  <script src="{% static 'home/js/video.js' %}"></script>
+  <script src="{% static 'home/js/dragscroll.js' %}"></script>
+  <script src="{% static 'home/js/main.js' %}"></script>
+
   <a onclick="history.back()" class="{% block back-btn-disable %}{% endblock %} fixed-top btn btn-primary btn-lg" style="width:100px;" href="#">
     {% block back-btn-text %}Back{% endblock %}
   </a>
@@ -17,11 +22,6 @@
   {% block content %}
   No content here.
   {% endblock %}
-  
-  <!-- JS scripts -->
-  <script src="{% static 'home/js/video.js' %}"></script>
-  <script src="{% static 'home/js/dragscroll.js' %}"></script>
-  <script src="{% static 'home/js/main.js' %}"></script>
 
 </body>
 </html>
