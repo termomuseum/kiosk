@@ -3,8 +3,17 @@
 {% block content %}
     <style>
       body {
+        height: {{ offset }}px !important; 
+      }
+
+      object {
+        height: {{ offset }}px;
+        width: 100%;
         overflow: hidden !important;
+        pointer-events: none;
       }
     </style>
-    <embed src="{{ MEDIA_URL }}{{ presentation_view.entry_file_url}}" type="application/pdf" style="height:100vh;width:100%;" />
+    <object class="" data="{{ MEDIA_URL }}{{ presentation_view.entry_file_url}}">
+    </object>
+
 {% endblock %}

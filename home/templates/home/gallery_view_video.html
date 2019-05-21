@@ -1,7 +1,19 @@
 {% extends 'home/gallery_view_base.html' %}
 
 {% block content %}
-  <video class="video-js gallery-video" controls data-setup='{}' width="1280" preload='auto'>
-    <source src='{{ MEDIA_URL }}{{ video_view }}' type='video/mp4' codecs="avc1.4D401E, mp4a.40.2">
-  </video>
+
+  <style>
+    body {
+      background: black;
+    }
+    .video-js {
+      position: unset;
+    }
+  </style>
+
+  <div class="video">
+    <video class="video-js gallery-video" controls data-setup='{}' height="100vh" preload='auto'>
+      <source src='{{ MEDIA_URL }}{{ video_view }}' type='video/mp4' codecs="avc1.4D401E, mp4a.40.2">
+    </video>
+  </div>
 {% endblock %}

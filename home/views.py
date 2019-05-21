@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import GalleryEntry, GalleryEntryCategory
-
+from PyPDF2 import PdfFileReader
 
 # Renders a main gallery page
 def index(request, args=None):
@@ -81,7 +81,20 @@ def gallery_image(request, pk=None):
 def gallery_presentation(request, pk=None):
   if pk!=None:
       presentation_obj = GalleryEntry.objects.get(id=pk)
-      context = {'presentation_view': presentation_obj}
+
+      count = 1
+      ratio_px = 1125 
+
+      filename = 'media/' + presentation_obj.entry_file_url.name
+      with open(filename, 'rb') as f:
+        pdf = PdfFileReader(f)
+        count = pdf.getNumPages()
+      print("Count of PDF pages: {}".format(count))
+
+      context = {
+          'presentation_view': presentation_obj,
+          'offset': int(count * ratio_px),
+          }
       # Rendering view
       return render(request, 'home/gallery_view_presentation.html', context=context)
   else:

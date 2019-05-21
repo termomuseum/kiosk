@@ -1,8 +1,14 @@
 {% extends 'home/gallery_view_base.html' %}
 
 {% block content %}
+  <style>
+    body {
+      background: black;
+    }
+  </style>
   <div class='gallery-image' style='background-image: url({{ MEDIA_URL }}{{ image_view.entry_file_url }});'></div> 
   <div class="description-block">
+    <h4 style="color: white;">{{ image_view.entry_name }}</h4>
     <p style="color: white;">{{ image_view.entry_desc }}</p>
     <p style="color: white;">{{ image_view.entry_desc_full }}</p>
   </div>
