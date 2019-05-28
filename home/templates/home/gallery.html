@@ -35,18 +35,24 @@
            
   {% if presentation_len > 0 %}
   <h4>Presentations</h4>
-  <div class="card-deck">
-      {% for obj in presentation_objects %}
-      <div class="card">
-        <a href="{% url 'home:presentation' obj.id %}">
-           <img src="{% static 'home/img/Presentationicon.png' %}" class="card-img-top" alt="...">
-        </a>  
-          <div class="card-body">
-            <h5 class="card-title">{{ obj.entry_name }}</h5>
-          </div>
-  </div> 
-      {% endfor %}
+  <div class="row">
+        {% for obj in presentation_objects %}
+            <div class="col-sm-3 m-3">
+                <div class="card" style="width: 12rem;">
+                  <a href="{% url 'home:presentation' obj.id %}">
+                    <img src="{% static 'home/img/Presentationicon.png' %}" class="card-img-top" alt="...">
+                  </a> 
+                  <div class="card-body">
+                    <h5 class="card-title">{{ obj.entry_name }}</h5>
+                    <a href="{% url 'home:presentation' obj.id %}" class="btn btn-primary">Go somewhere</a>
+                  </div>
+                </div>
+            </div>
+        {% endfor %}
   {% endif %}
   </div>
   
 {% endblock %}
+ <a href="{% url 'home:presentation' obj.id %}">
+           <img src="{% static 'home/img/Presentationicon.png' %}" class="card-img-top" alt="...">
+        </a>  
