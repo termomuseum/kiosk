@@ -1,4 +1,5 @@
 {% extends 'home/base.html' %}
+{% load static %}
 
 {% block title %}Thermometriemuseum Geraberg{% endblock %}
 {% block subtitle %}{{ category_name }}{% endblock %}
@@ -23,8 +24,18 @@
            
   {% if presentation_len > 0 %}
   <h4>Presentations</h4>
-  {% for obj in presentation_objects %}
-  <a href="{% url 'home:presentation' obj.id %}"><p>{{ obj.entry_name }}</p></a>  
-  {% endfor %}
+  <div class="card-deck">
+      {% for obj in presentation_objects %}
+      <div class="card">
+        <a href="{% url 'home:presentation' obj.id %}">
+           <img src="{% static 'home/img/Presentationicon.png' %}" class="card-img-top" alt="...">
+        </a>  
+          <div class="card-body">
+            <h5 class="card-title">{{ obj.entry_name }}</h5>
+          </div>
+  </div> 
+      {% endfor %}
   {% endif %}
+  </div>
+  
 {% endblock %}
