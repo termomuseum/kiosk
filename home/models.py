@@ -34,7 +34,7 @@ class GalleryEntry(models.Model):
   entry_category = models.ForeignKey(GalleryEntryCategory, default=None, null=True, blank=True, on_delete=models.CASCADE, verbose_name="Category")
   entry_name = models.CharField(default="", max_length=100, verbose_name="Name")
   entry_file_url = models.FileField(default="", verbose_name="File")
-  entry_desc = models.TextField(default="", verbose_name="Description" null=True, blank=True)
+  entry_desc = models.TextField(default="", verbose_name="Description",null=True, blank=True)
   entry_desc_full = models.TextField(default="", verbose_name="Full Description")
 
   def __str__(self):
