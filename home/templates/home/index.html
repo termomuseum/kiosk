@@ -1,5 +1,5 @@
 {% extends 'home/base.html' %}
-{% load static %}
+{% load get_at_index %}
 
 {% block title %}Thermometriemuseum Geraberg{% endblock %}
 {% block subtitle %}{% endblock %}
@@ -19,7 +19,7 @@
     </div> <!-- card-header -->
     <a href="{% url 'home:category_view' cat.id %}">
       {#src="{% static 'home/img/cat_thermometer.png' %}#}
-      <img class="card-img-top" src="media/{% for url in category_images|slice:forloop.counter0 %}{{ url }}{% endfor %}">
+      <img class="card-img-top" src="media/{{ category_images|get_at_index:forloop.counter0 }}">
     </a>
   </div> <!-- card -->
   </div> <!-- col -->

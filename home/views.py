@@ -31,7 +31,6 @@ def index(request, args=None):
         cat_images_ordered.append(str(cat_img.category_image))
         print(cat)
         print(cat_img)
-        print(cat_img.category_image)
   print("[End Debug]\n")
 
   context = {
