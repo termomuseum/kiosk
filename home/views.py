@@ -1,7 +1,15 @@
+# from django import template
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import GalleryEntry, GalleryEntryCategory
+from .models import GalleryEntry, GalleryEntryCategory, GalleryEntryCategoryImage
 from PyPDF2 import PdfFileReader
+
+
+# register = template.Library()
+# @register.filter
+# def get_at_index(list, index):
+#   return list[index]
+
 
 # Renders a main gallery page
 def index(request, args=None):
@@ -12,9 +20,23 @@ def index(request, args=None):
   # image_objs = GalleryEntry.objects.filter(entry_type__type_name='Image')
   # presentation_objs = GalleryEntry.objects.filter(entry_type__type_name='Presentation')
   categories = GalleryEntryCategory.objects.all()
+  category_images = GalleryEntryCategoryImage.objects.all() 
+  
+  cat_images_ordered = [] 
+  
+  print("\n[Begin Debug]")
+  for cat in categories:
+    for cat_img in category_images:
+      if cat_img.category == cat:
+        cat_images_ordered.append(str(cat_img.category_image))
+        print(cat)
+        print(cat_img)
+        print(cat_img.category_image)
+  print("[End Debug]\n")
 
   context = {
     'categories': categories,
+    'category_images': cat_images_ordered,
     # 'video_objs': video_objs,
     # 'image_objs': image_objs,
     # 'presentation_objs': presentation_objs,

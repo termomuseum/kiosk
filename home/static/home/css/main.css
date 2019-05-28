@@ -1,11 +1,11 @@
 /* Width relative font sizes */
-h1 { font-size: 3.00vw !important; }
-h2 { font-size: 2.40vw !important; }
-h3 { font-size: 2.10vw !important; }
-h4 { font-size: 1.75vw !important; }
-h5 { font-size: 1.50vw !important; }
-h6 { font-size: 1.25vw !important; }
-p  { font-size: 1.20vw !important; }
+h1 { font-size: 2.90vw !important; }
+h2 { font-size: 2.30vw !important; }
+h3 { font-size: 2.00vw !important; }
+h4 { font-size: 1.65vw !important; }
+h5 { font-size: 1.40vw !important; }
+h6 { font-size: 1.15vw !important; }
+p  { font-size: 1.10vw !important; }
 
 /* Image View Styles */
 .gallery-image-body {

@@ -1,4 +1,6 @@
+from django.conf import settings
 from django.db import models
+
 
 # Model for Gallery Entry which describes an entry type
 class GalleryEntryType(models.Model):
@@ -40,3 +42,12 @@ class GalleryEntry(models.Model):
   def __str__(self):
     return self.entry_name
 
+
+
+class GalleryEntryCategoryImage(models.Model):
+  category = models.ForeignKey(GalleryEntryCategory, default=None, null=True, blank=True, on_delete=models.CASCADE, verbose_name="Category")
+  category_image = models.FileField(upload_to="static", default="", verbose_name="CategoryImage")
+  
+  def __str__(self):
+    return self.category.category_name + " Image"
+ 
