@@ -35,7 +35,7 @@ class GalleryEntry(models.Model):
   entry_name = models.CharField(default="", max_length=100, verbose_name="Name")
   entry_file_url = models.FileField(default="", verbose_name="File")
   entry_desc = models.TextField(default="", verbose_name="Description",null=True, blank=True)
-  entry_desc_full = models.TextField(default="", verbose_name="Full Description")
+  entry_desc_full = models.TextField(default="", verbose_name="Full Description",null=True, blank=True)
 
   def __str__(self):
     return self.entry_name
