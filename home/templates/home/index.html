@@ -10,8 +10,8 @@
 {% block content %}
   <div class="row" style="margin-top: 50px">
   {% for cat in categories %}
-  <div class="col-4-md">
-  <div class="card" style="width: 16.6vw; margin-right: 15px;">
+  <div class="col-4">
+  <div class="card" style="width: 16.6vw; margin-right: 15px;margin-top:15px;">
     <div class="card-body" style="padding: 1vw">
       <!--<a href="{% url 'home:category_view' cat.id %}">-->
         <h5 style="margin: 0">{{ cat.category_name }}</h5>
