@@ -26,11 +26,21 @@ def index(request, args=None):
   
   print("\n[Begin Debug]")
   for cat in categories:
+    found_img = False
+    
     for cat_img in category_images:
       if cat_img.category == cat:
         cat_images_ordered.append(str(cat_img.category_image))
+        found_img = True
         print(cat)
         print(cat_img)
+    
+    if found_img == False:
+      # set to default image
+      cat_images_ordered.append("/static/home/img/test.png")
+      pass
+
+        
   print("[End Debug]\n")
 
   context = {
