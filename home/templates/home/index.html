@@ -10,21 +10,19 @@
 {% block content %}
   <div class="row" style="margin-top: 50px">
   {% for cat in categories %}
-  <div class="col-4">
-  <div class="card" style="width: 16.6vw; margin-right: 15px;margin-top:15px;">
-    <div class="card-body" style="padding: 1vw">
-      <!--<a href="{% url 'home:category_view' cat.id %}">-->
-        <h5 style="margin: 0">{{ cat.category_name }}</h5>
-      <!--</a>-->
-    </div> <!-- card-header -->
-    <a href="{% url 'home:category_view' cat.id %}">
-      {#src="{% static 'home/img/cat_thermometer.png' %}#}
-      <img class="card-img-top" src="media/{{ category_images|get_at_index:forloop.counter0 }}">
-    </a>
-  </div> <!-- card -->
+  <div class="col-3">
+    <div class="card">
+      <div class="card-body" style="padding: 1vw; border-bottom: 1px solid #eee; margin-bottom: 4px">
+        <!--<a href="{% url 'home:category_view' cat.id %}">-->
+          <h4 style="margin: 0">{{ cat.category_name }}</h4>
+        <!--</a>-->
+      </div> <!-- card-header -->
+      <a href="{% url 'home:category_view' cat.id %}">
+        <img class="card-img-top" src="{{ category_images|get_at_index:forloop.counter0 }}">
+      </a>
+    </div> <!-- card -->
   </div> <!-- col -->
   {% endfor %}
   </div> <!-- row -->
 {% endblock %}
 {% load static %}
-

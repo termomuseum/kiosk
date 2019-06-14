@@ -4,9 +4,6 @@
 {% block title %}Thermometriemuseum Geraberg{% endblock %}
 {% block subtitle %}{{ category_name }}{% endblock %}
 
-{# {% block back-btn-text %}Back{% endblock %} #}
-{# {% block back-btn-disable %}disable{% endblock %} #}
-
 {% block content %}
 
   <!-- Test
@@ -20,37 +17,65 @@
   -->
 
   {% if video_len > 0 %}
-  <h4>Videos</h4>
-  {% for obj in video_objects %}
-  <a href="{% url 'home:video' obj.id %}"><p>{{ obj.entry_name }}</p></a>  
-  {% endfor %}
+  <h3>Videos</h3>
+  <div class="row">
+    {% for obj in video_objects %}
+    <div class="col-3 mb-2">
+      <div class="card" style="">
+        <div class="card-body">
+          <h5 class="card-title">{{ obj.entry_name }}</h5>
+          <p class="card-text">{{ obj.entry_desc }}</p>
+        </div>
+        <a href="{% url 'home:video' obj.id %}">
+          <img src="{% static 'home/img/Videoicon.png' %}" style="padding: 1.5vw" class="card-img-top" alt="...">
+        </a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  <br><br>
   {% endif %}
 
   {% if image_len > 0 %}
-  <h4>Images</h4>
-  {% for obj in image_objects %}
-  <a href="{% url 'home:image' obj.id %}"><p>{{ obj.entry_name }}</p></a>  
-  {% endfor %}
-  {% endif %}
-           
-  {% if presentation_len > 0 %}
-  <h4>Presentations</h4>
+  <h3>Images</h3>
   <div class="row">
-        {% for obj in presentation_objects %}
-            <div class="col-sm-6 mb-2">
-                <div class="card" style="">
-                  <a href="{% url 'home:presentation' obj.id %}">
-                    <img src="{% static 'home/img/Presentationicon.png' %}" class="card-img-top" alt="...">
-                  </a> 
-                  <div class="card-body">
-                    <h6 class="card-title">{{ obj.entry_name }}</h6>
-                    <p class="card-text">{{ obj.entry_desc }}</p>
-                    <a href="{% url 'home:presentation' obj.id %}" class="btn btn-primary">Go somewhere</a>
-                  </div>
-                </div>
-            </div>
-        {% endfor %}
+    {% for obj in image_objects %}
+    <div class="col-3 mb-2">
+      <div class="card" style="">
+        <div class="card-body">
+          <h5 class="card-title">{{ obj.entry_name }}</h5>
+          <p class="card-text">{{ obj.entry_desc }}</p>
+          <!--<a href="{% url 'home:presentation' obj.id %}" class="btn btn-primary">Go somewhere</a>-->
+        </div>
+        <a href="{% url 'home:image' obj.id %}">
+          <img src="{{ MEDIA_URL }}{{ obj.entry_file_url }}" class="card-img-top" alt="...">
+        </a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  <br><br>
+  {% endif %}
+
+  {% if presentation_len > 0 %}
+  <h3>Presentations</h3>
+  <div class="row">
+  {% for obj in presentation_objects %}
+    <div class="col-3 mb-2">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ obj.entry_name }}</h5>
+          <p class="card-text">{{ obj.entry_desc }}</p>
+          <!--<a href="{% url 'home:presentation' obj.id %}" class="btn btn-primary">Go somewhere</a>-->
+        </div>
+        <a href="{% url 'home:presentation' obj.id %}">
+          <img src="{% static 'home/img/Presentationicon.png' %}" class="card-img-top" alt="...">
+        </a>
+      </div>
+    </div>
+  {% endfor %}
+  <br><br>
   {% endif %}
   </div>
-  
+
 {% endblock %}

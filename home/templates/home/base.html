@@ -11,21 +11,21 @@
   <div class="container" style="padding-top: 5vw">
 
   <!-- JS scripts -->
-  <script src="{% static 'home/js/dragscroll.js' %}"></script>
+  <script src="{% static 'home/js/dragscroll.js' %}{% block disable-drag %}{% endblock %}"></script>
   <script src="{% static 'home/js/main.js' %}"></script>
 
-    <a onclick="history.back()" class="{% block back-btn-disable %}{% endblock %} fixed-top btn btn-primary btn-lg" style="width:100px;" href="#">
+    <a onclick="history.back()" class="{% block back-btn-disable %}{% endblock %} back-btn fixed-top btn btn-primary btn-lg" href="#">
       {% block back-btn-text %}Back{% endblock %}
     </a>
 
-    <div class="row">  
+    <div class="row">
 <!--      <div class="col-1">
       </div> -->
-      
+
       <div class="col-10 offset-1 mt-2">
         <h1>{% block title %}{% endblock %}</h1>
-        <h3>{% block subtitle %}{% endblock %}</h3>
-        
+        <h2 style="margin-top: 30px; margin-bottom: 20px">{% block subtitle %}{% endblock %}</h2>
+
         {% block content %}
         No content here.
         {% endblock %}
@@ -34,5 +34,6 @@
     </div>
   </div>
 
+  <br><br><br><br>
 </body>
 </html>

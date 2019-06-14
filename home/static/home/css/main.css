@@ -1,11 +1,45 @@
 /* Width relative font sizes */
-h1 { font-size: 2.50vw !important; }
-h2 { font-size: 1.90vw !important; }
-h3 { font-size: 1.60vw !important; }
-h4 { font-size: 1.25vw !important; }
-h5 { font-size: 1.00vw !important; }
-h6 { font-size: 0.75vw !important; }
-p  { font-size: 0.70vw !important; }
+h1 { font-size: 2.70vw !important; }
+h2 { font-size: 2.10vw !important; }
+h3 { font-size: 1.80vw !important; }
+h4 { font-size: 1.45vw !important; }
+h5 { font-size: 1.20vw !important; }
+h6 { font-size: 0.95vw !important; }
+p  { font-size: 0.90vw !important; }
+
+
+.editor
+{
+  border: 1px solid #ddd;
+  padding: 25px;
+  border-radius: 2px;
+  margin-right: 15px;
+  margin-top: 15px;
+  box-shadow: 0 0 10px 0 rgba(0,0,0,0.125);
+  width: 10vw;
+}
+
+body {
+  background-image: url("/static/home/img/bg3.png");
+}
+
+.card {
+  box-shadow: 0 0 10px 0px rgba(0,0,0,0.125);
+  margin-right: 15px;
+  margin-top:15px;
+  width: 16.6vw;
+}
+
+.card-img-top{
+  padding: 6px;
+}
+
+.back-btn {
+  width: 120px;
+  height: 60px;
+  font-size: 26px !important;
+  border-radius: 0px !important;
+}
 
 /* Image View Styles */
 .gallery-image-body {
@@ -41,6 +75,3 @@ p  { font-size: 0.70vw !important; }
 .disable {
   display: none !important;
 }
-
-
-
