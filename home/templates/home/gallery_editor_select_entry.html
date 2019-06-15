@@ -1,0 +1,34 @@
+{% extends 'home/base.html' %}
+{% load get_at_index %}
+
+{% block title %}Thermometriemuseum Geraberg{% endblock %}
+{% block subtitle %}Editor / Edit Entry{% endblock %}
+
+{% block back-btn-text %}Disabled{% endblock %}
+{% block back-btn-disable %}disable{% endblock %}
+{% block disable-drag %}disable{% endblock %}
+
+{% block content %}
+<div class="row" style="margin-top: 50px">
+  <div class="col-4"></div>
+  <div class="editor col-4" style="background: white; height: 100%">
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <h3>Select Entry to Edit</h3>
+      <br>
+      <div class="form-group">
+        <label for="entry-select">Select Entry</label>
+        <select name="entry_pk" class="form-control" id="entry-select">
+          {% for entry in entries %}
+          <option value="{{ entry.pk }}">{{ entry.entry_name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <input type="hidden" name="mode" value="{{ mode }}"></input>
+      <button type="submit" name="ed" value="edit_entry_select_entry" class="btn btn-primary">Next...</button>
+      <button type="submit" name="ed" value="cancel" class="btn btn-danger">Cancel</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
+

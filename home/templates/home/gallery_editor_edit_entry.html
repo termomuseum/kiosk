@@ -1,0 +1,79 @@
+{% extends 'home/base.html' %}
+{% load get_at_index %}
+
+{% block title %}Thermometriemuseum Geraberg{% endblock %}
+{% block subtitle %}Editor / Edit Entry{% endblock %}
+
+{% block back-btn-text %}Disabled{% endblock %}
+{% block back-btn-disable %}disable{% endblock %}
+{% block disable-drag %}disable{% endblock %}
+
+{% block content %}
+<div class="row" style="margin-top: 50px">
+<div class="col-3"></div>
+<div class="editor col-6" style="background: white; height: 100%;">
+  {% if mode == "edit" %}
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <h3>Edit Entry</h3>
+    <br>
+    <div class="form-group">
+      <label for="entr-name">Entry Name</label>
+      <input class="form-control" name="ename" value="{{ ename }}" type="text" placeholder="Enter text here..." id="entr-name" required>
+    </div>
+    <!--
+    <div class="form-group">
+      <label for="entr-type">Entry Type</label>
+      <select name="etype" class="form-control" id="entr-type">
+        {% for typ in entry_types %}
+        <option value="{{ typ.pk }}">{{ typ.type_name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    -->
+    <div class="form-group">
+      <label for="entr-cat">Entry Category</label>
+      <select name="ecat" class="form-control" id="entr-cat">
+        {% for cat in categories %}
+        <option value="{{ cat.pk }}" {% if cat.pk == ecat  %}selected="selected"{% endif %}>
+          {{ cat.category_name }}
+        </option>
+        {% endfor %}
+      </select>
+    </div>
+    <!--
+    <div class="form-group">
+      <label for="entr-file">Entry File</label>
+      <input type="file" name="efile" class="form-control-file" id="entr-file">
+    </div>
+    -->
+    <div class="form-group">
+      <label for="entr-desc">Entry Short Description</label>
+      <textarea class="form-control" name="edesc" id="entr-desc" rows="2">{{ edesc }}</textarea>
+    </div>
+    <div class="form-group">
+      <label for="entr-fdesc">Entry Full Description</label>
+      <textarea class="form-control" name="efdesc" id="entr-fdesc" rows="6">{{ efdesc }}</textarea>
+    </div>
+    <input type="hidden" name="epk" value="{{ epk }}">
+    <button type="submit" name="ed" value="edit_entry_save_entry" class="btn btn-primary">Save</button>
+    <button type="submit" name="ed" value="cancel" class="btn btn-danger">Cancel</button>
+  </form>
+  
+  {% else %}
+
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <h3>Delete Entry</h3>
+    <br>
+    <div class="form-group">
+      <label>Are you sure you want to delete "{{ ename }}" entry?</label>
+    </div>
+    <input type="hidden" name="epk" value="{{ epk }}">
+    <button type="submit" name="ed" value="edit_entry_delete_entry" class="btn btn-danger">Yes, delete.</button>
+    <button type="submit" name="ed" value="cancel" class="btn btn-primary">No</button>
+  </form>
+  {% endif %}
+</div>
+{% endblock %}
+

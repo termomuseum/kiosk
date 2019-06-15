@@ -27,60 +27,123 @@
   </div>
   {% endif %}
 
-  <div class="row" style="margin-top: 50px">
-    <div class="editor col-5" style="background:white; height: 100%">
-      <form method="post" enctype="multipart/form-data">
+  <div class="row" style="margin-top: 50px;">
+    <!-- Add Category Editor  -->
+    <div class="col-4" style="height: 100%">
+      <form class="editor"  method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <h3>Add Category</h3>
         <br>
         <div class="form-group">
-          <label for="add-cat-cat-name">Category Name</label>
-          <input class="form-control" name="cname" type="text" placeholder="Enter text here..." id="add-cat-cat-name" required>
+          <label for="cat-name">Category Name</label>
+          <input class="form-control" name="cname" type="text" placeholder="Enter text here..." id="cat-name" required>
         </div>
         <button type="submit" name="ed" value="add_cat" class="btn btn-primary">Add</button>
       </form>
     </div>
 
-    <div class="editor editor-add-entry col-6" style="background:white; height: 100%">
-      <form method="post" enctype="multipart/form-data">
+    <!-- Add Entry Editor  -->
+    <div class="col-8" style="height: 100%">
+      <form class="editor" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <h3>Add Entry</h3>
         <br>
         <div class="form-group">
-          <label for="add-entr-entr-name">Entry Name</label>
-          <input class="form-control" name="ename" type="text" placeholder="Enter text here..." id="add-entr-entr-name" required>
+          <label for="entr-name">Entry Name</label>
+          <input class="form-control" name="ename" type="text" placeholder="Enter text here..." id="entr-name" required>
         </div>
         <div class="form-group">
-          <label for="add-entr-entr-type">Entry Type</label>
-          <select name="etype" class="form-control" id="add-entr-entr-type">
+          <label for="entr-type">Entry Type</label>
+          <select name="etype" class="form-control" id="entr-type">
             {% for typ in entry_types %}
             <option value="{{ typ.pk }}">{{ typ.type_name }}</option>
             {% endfor %}
           </select>
         </div>
         <div class="form-group">
-          <label for="add-entr-entr-cat">Entry Category</label>
-          <select name="ecat" class="form-control" id="add-entr-entr-cat">
+          <label for="entr-cat">Entry Category</label>
+          <select name="ecat" class="form-control" id="entr-cat">
             {% for cat in categories %}
             <option value="{{ cat.pk }}">{{ cat.category_name }}</option>
             {% endfor %}
           </select>
         </div>
         <div class="form-group">
-          <label for="add-entr-entr-file">Entry File</label>
-          <input type="file" name="efile" class="form-control-file" id="add-entr-entr-file">
+          <label for="entr-file">Entry File</label>
+          <input type="file" name="efile" class="form-control-file" id="entr-file">
         </div>
         <div class="form-group">
-          <label for="add-entr-entr-desc">Entry Short Description</label>
-          <textarea class="form-control" name="edesc" id="add-entr-entr-desc" rows="2"></textarea>
+          <label for="entr-desc">Entry Short Description</label>
+          <textarea class="form-control" name="edesc" id="entr-desc" rows="2"></textarea>
         </div>
         <div class="form-group">
-          <label for="add-entr-entr-fdesc">Entry Full Description</label>
-          <textarea class="form-control" name="efdesc" id="add-entr-entr-fdesc" rows="6"></textarea>
+          <label for="entr-fdesc">Entry Full Description</label>
+          <textarea class="form-control" name="efdesc" id="entr-fdesc" rows="6"></textarea>
         </div>
         <button type="submit" name="ed" value="add_entry" class="btn btn-primary">Add</button>
       </form>
     </div>
 
+    <!-- Edit Category Editor  -->
+    <div class="col-4" style="height: 100%">
+      <form class="editor"  method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h3>Edit Category Name</h3>
+        <br>
+        <div class="form-group">
+          <label for="cat-select">Select Category</label>
+          <select name="cat" class="form-control" id="cat-select">
+            {% for cat in categories %}
+            <option value="{{ cat.pk }}">{{ cat.category_name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="cat-name">New Category Name</label>
+          <input class="form-control" name="cat-name" type="Text" placeholder="Enter text here..." id="cat-name" required>
+        </div/editor/>
+        <button type="submit" name="ed" value="edit_cat" class="btn btn-primary">Edit</button>
+      </form>
+    </div>
+
+    <!-- Edit Entry Editor  -->
+    <div class="col-4" style="height: 100%">
+      <form class="editor" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h3>Edit Entry</h3>
+        <br>
+        <div class="form-group">
+          <label for="cat-select">Select Category</label>
+          <select name="cat" class="form-control" id="cat-select">
+            {% for cat in categories %}
+            <option value="{{ cat.pk }}">{{ cat.category_name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <input type="hidden" name="mode" value="edit">
+        <button type="submit" name="ed" value="edit_entry_select_cat" class="btn btn-primary">Next...</button>
+      </form>
+    </div>
+
+    <!-- Delete Entry Editor  -->
+    <div class="col-4" style="height: 100%">
+      <form class="editor" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h3>Delete Entry</h3>
+        <br>
+        <div class="form-group">
+          <label for="cat-select">Select Category</label>
+          <select name="cat" class="form-control" id="cat-select">
+            {% for cat in categories %}
+            <option value="{{ cat.pk }}">{{ cat.category_name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <input type="hidden" name="mode" value="delete">
+        <button type="submit" name="ed" value="edit_entry_select_cat" class="btn btn-primary">Next...</button>
+      </form>
+    </div>
+  
+  </div>
 {% endblock %}
 {% load static %}
