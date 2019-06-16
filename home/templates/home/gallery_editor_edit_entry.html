@@ -2,7 +2,7 @@
 {% load get_at_index %}
 
 {% block title %}Thermometriemuseum Geraberg{% endblock %}
-{% block subtitle %}Editor / Edit Entry{% endblock %}
+{% block subtitle %}Editor / {% if mode == "edit"  %}Edit{% else %}Delete{% endif %} Entry{% endblock %}
 
 {% block back-btn-text %}Disabled{% endblock %}
 {% block back-btn-disable %}disable{% endblock %}
@@ -67,7 +67,7 @@
     <h3>Delete Entry</h3>
     <br>
     <div class="form-group">
-      <label>Are you sure you want to delete "{{ ename }}" entry?</label>
+      <label>Are you sure you want to delete <b>"{{ ename }}"</b> entry?</label>
     </div>
     <input type="hidden" name="epk" value="{{ epk }}">
     <button type="submit" name="ed" value="edit_entry_delete_entry" class="btn btn-danger">Yes, delete.</button>

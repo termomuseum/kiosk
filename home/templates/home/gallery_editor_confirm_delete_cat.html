@@ -1,0 +1,30 @@
+
+{% extends 'home/base.html' %}
+{% load get_at_index %}
+
+{% block title %}Thermometriemuseum Geraberg{% endblock %}
+{% block subtitle %}Editor / Delete Category{% endblock %}
+
+{% block back-btn-text %}Disabled{% endblock %}
+{% block back-btn-disable %}disable{% endblock %}
+{% block disable-drag %}disable{% endblock %}
+
+{% block content %}
+<div class="row" style="margin-top: 50px">
+<div class="col-3"></div>
+<div class="editor col-6" style="background: white; height: 100%;">
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <h3>Delete Category</h3>
+    <br>
+    <div class="alert alert-danger"><h5><b>Warning!</b></h5> All entries within a category will be deleted!</div>
+    <div class="form-group">
+      <label>Are you sure you want to delete <b>"{{ cname }}"</b> category?</label>
+    </div>
+    <input type="hidden" name="cpk" value="{{ cpk }}">
+    <button type="submit" name="ed" value="edit_confirm_delete_cat" class="btn btn-danger">Yes, delete.</button>
+    <button type="submit" name="ed" value="cancel" class="btn btn-primary">No</button>
+  </form>
+</div>
+{% endblock %}
+

@@ -2,7 +2,7 @@
 {% load get_at_index %}
 
 {% block title %}Thermometriemuseum Geraberg{% endblock %}
-{% block subtitle %}Editor / Edit Entry{% endblock %}
+{% block subtitle %}Editor / {% if mode == "edit"  %}Edit{% else %}Delete{% endif %} Entry{% endblock %}
 
 {% block back-btn-text %}Disabled{% endblock %}
 {% block back-btn-disable %}disable{% endblock %}
