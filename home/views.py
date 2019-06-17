@@ -1,4 +1,3 @@
-# from django import template
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.core.files.storage import FileSystemStorage
@@ -6,53 +5,37 @@ from .models import GalleryEntry, GalleryEntryCategory, GalleryEntryCategoryImag
 from PyPDF2 import PdfFileReader
 
 
-# register = template.Library()
-# @register.filter
-# def get_at_index(list, index):
-#   return list[index]
-
 
 # Renders a main gallery page
 def index(request, args=None):
-  # Getting all the gallery items or entries
-  # We separate them in different lists for
-  # their separation in a template
-  # video_objs = GalleryEntry.objects.filter(entry_type__type_name='Video')
-  # image_objs = GalleryEntry.objects.filter(entry_type__type_name='Image')
-  # presentation_objs = GalleryEntry.objects.filter(entry_type__type_name='Presentation')
+  # Gettina all the categories and category images
   categories = GalleryEntryCategory.objects.all()
   category_images = GalleryEntryCategoryImage.objects.all()
-
+  # Ordered category images list
   cat_images_ordered = []
 
-  print("\n[Begin Debug]")
+  # looping through all the categories and images
   for cat in categories:
     found_img = False
 
+    # Finding a category image
     for cat_img in category_images:
       if cat_img.category == cat:
         cat_images_ordered.append("media/" + str(cat_img.category_image))
         found_img = True
-        print(cat)
-        print(cat_img)
-
+    
+    # if category image is not found, set it to default icon
     if found_img == False:
-      # set to default image
       cat_images_ordered.append("/static/home/img/cat-icon.png")
       pass
-
-
-  print("[End Debug]\n")
 
   context = {
     'categories': categories,
     'category_images': cat_images_ordered,
-    # 'video_objs': video_objs,
-    # 'image_objs': image_objs,
-    # 'presentation_objs': presentation_objs,
   }
   # Rendering view
   return render(request, 'home/index.html', context=context)
+
 
 
 # Category View
@@ -61,10 +44,17 @@ def gallery_category(request, pk=None):
     print("No pk was given :(")
     return index(request)
 
+  # Getting all of the objects in a category
   category = GalleryEntryCategory.objects.get(id=pk)
-  video_objects = GalleryEntry.objects.filter(entry_category=category).filter(entry_type__type_name='Video')
-  image_objects = GalleryEntry.objects.filter(entry_category=category).filter(entry_type__type_name='Image')
-  presentation_objects = GalleryEntry.objects.filter(entry_category=category).filter(entry_type__type_name='Presentation')
+  video_objects = GalleryEntry.objects.filter(
+      entry_category=category).filter(
+          entry_type__type_name='Video')
+  image_objects = GalleryEntry.objects.filter(
+      entry_category=category).filter(
+          entry_type__type_name='Image')
+  presentation_objects = GalleryEntry.objects.filter(
+      entry_category=category).filter(
+          entry_type__type_name='Presentation')
 
   context = {
         "category_name": category.category_name,
@@ -75,64 +65,64 @@ def gallery_category(request, pk=None):
         "presentation_objects": presentation_objects,
         "presentation_len": len(presentation_objects),
       }
+  # Rendering gallery view
   return render(request, 'home/gallery.html', context=context)
+
 
 
 # Video gallery view
 def gallery_video(request, pk=None):
-  if pk != None:
-      video_obj = GalleryEntry.objects.get(id=pk)
-      context = {'video_view': video_obj.entry_file_url}
-      # Rendering view
-      return render(request, 'home/gallery_view_video.html', context=context)
-  else:
-      video_objects = GalleryEntry.objects.filter(entry_type__type_name='Video')
-      context = {'videos': video_objects}
-      print(context)
-      # Rendering view
-      return render(request, 'home/gallery_view_video.html', context=context)
+  # if pk != None:
+    # Getting a video object to display
+    # video_obj = GalleryEntry.objects.get(id=pk)
+    # context = {'video_view': video_obj.entry_file_url}
+    # Rendering view
+    # return render(request, 'home/gallery_view_video.html', context=context)
+  # else:
+    # Getting all of the video objects, to display all of them
+    # video_objects = GalleryEntry.objects.filter(entry_type__type_name='Video')
+    # context = {'videos': video_objects}
+    # Rendering view
+    # return render(request, 'home/gallery_view_video.html', context=context)
+  
+  # Getting a video object to display
+  video_obj = GalleryEntry.objects.get(id=pk)
+  context = {'video_view': video_obj.entry_file_url}
+  # Rendering view
+  return render(request, 'home/gallery_view_video.html', context=context)
+
 
 
 # Image gallery view
 def gallery_image(request, pk=None):
-  if pk!=None:
-      image_obj = GalleryEntry.objects.get(id=pk)
-      context = {'image_view': image_obj}
-      # Rendering view
-      return render(request, 'home/gallery_view_image.html', context=context)
-  else:
-      image_objects = GalleryEntry.objects.filter(entry_type__type_name='Image')
-      context = {'images': image_objects}
-      # Rendering view
-      return render(request, 'home/gallery_view_image.html', context=context)
+  # Getting an image object to display 
+  image_obj = GalleryEntry.objects.get(id=pk)
+  context = {'image_view': image_obj}
+  # Rendering view
+  return render(request, 'home/gallery_view_image.html', context=context)
+
 
 
 # Presentation gallery view
 def gallery_presentation(request, pk=None):
-  if pk!=None:
-      presentation_obj = GalleryEntry.objects.get(id=pk)
+  # Getting a presentation object
+  presentation_obj = GalleryEntry.objects.get(id=pk)
+  count = 1        # count of pages in a PDF file
+  ratio_px = 3000  # how many pixels of height do we add per page
 
-      count = 1
-      ratio_px = 3000
+  # getting a PDF file
+  filename = 'media/' + presentation_obj.entry_file_url.name
+  # getting count of pages in a PDF file
+  with open(filename, 'rb') as f:
+    pdf = PdfFileReader(f)
+    count = pdf.getNumPages()
 
-      filename = 'media/' + presentation_obj.entry_file_url.name
-      with open(filename, 'rb') as f:
-        pdf = PdfFileReader(f)
-        count = pdf.getNumPages()
-      print("Count of PDF pages: {}".format(count))
-
-      context = {
-          'presentation_view': presentation_obj,
-          'offset': int(count * ratio_px),
-          }
-      # Rendering view
-      return render(request, 'home/gallery_view_presentation.html', context=context)
-  else:
-      presentation_objects = GalleryEntry.objects.filter(entry_type__type_name='Presentation')
-      context = {'presentations': presentation_objects}
-      # Rendering view
-      return render(request, 'home/gallery_view_presentation.html', context=context)
-
+  context = {
+    'presentation_view': presentation_obj,
+    'offset': int(count * ratio_px),
+  }
+  # Rendering view
+  return render(request, 'home/gallery_view_presentation.html', context=context)
 
 
 
@@ -166,7 +156,6 @@ def editor(request):
       show_error = True
       error_msg = "ERROR!"
 
-
   # Adding new entry
   if editor_type == "add_entry":
     try:
@@ -193,7 +182,6 @@ def editor(request):
       show_error = True
       error_msg = "ERROR!"
 
-
   # Edit category name
   if editor_type == "edit_cat":
     try:
@@ -211,12 +199,11 @@ def editor(request):
       show_error = True
       error_msg = "ERROR!"
 
-
   # Edit entry
-  # Firsly, the category needs to be chosen
-  # Then the entry within the category
-  # Then the entry is edited
-  # Selecting category
+  ##-> Firsly, the category needs to be chosen
+  ##-> Then the entry within the category
+  ##-> Then the entry is edited
+  ##-> Selecting category
   if editor_type == "edit_entry_select_cat":
     try:
       # Getting selected category pk, to find an entry in it
@@ -287,7 +274,6 @@ def editor(request):
       show_error = True
       error_msg = "ERROR!"
 
-
   # Deleting entry
   if editor_type == "edit_entry_delete_entry":
     try:
@@ -301,12 +287,6 @@ def editor(request):
     except Exception as e:
       show_error = True
       error_msg = "ERROR!"
-
-
-  # Cancel something.
-  if editor_type == "cancel":
-    pass
-
 
   # Delete category and all of its content
   if editor_type == "edit_entry_delete_cat":
@@ -327,7 +307,6 @@ def editor(request):
       show_error = True
       error_msg = "ERROR!"
 
-
   # Confirming category delete
   if editor_type == "edit_confirm_delete_cat":
     try:
@@ -346,6 +325,10 @@ def editor(request):
       show_error = True
       error_msg = "ERROR!"
 
+  # Cancel something.
+  if editor_type == "cancel":
+    pass
+
   # Render context
   context = {
     "show_debug": show_debug,
@@ -361,8 +344,10 @@ def editor(request):
   return render(request, 'home/gallery_editor.html', context=context)
 
 
+
 def editor_add_new_category(cname):
   GalleryEntryCategory.objects.create(category_name=cname)
+
 
 
 def editor_add_new_entry(ename, etype, ecat, efile_url, edesc, efdesc):
