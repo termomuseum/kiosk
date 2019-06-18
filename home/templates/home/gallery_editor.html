@@ -48,6 +48,15 @@
           <label for="cat-name">Category Name</label>
           <input class="form-control" name="cname" type="text" placeholder="Enter text here..." id="cat-name" required>
         </div>
+        <div class="form-group">
+          <label for="cat-select">Parent Category</label>
+          <select class="form-control" name="cpar" type="text" id="cat-select" required>
+            <option value="0">----</option>
+            {% for cat in categories %}
+            <option value="{{ cat.pk }}">{% if cat.category_parent %}{{ cat.category_parent.category_name }}/{% endif %}{{ cat.category_name }}</option>
+            {% endfor %}
+          </select>
+        </div>
         <button type="submit" name="ed" value="add_cat" class="btn btn-primary">Add</button>
       </form>
 
@@ -60,7 +69,8 @@
           <label for="cat-select">Select Category</label>
           <select name="cat" class="form-control" id="cat-select">
             {% for cat in categories %}
-            <option value="{{ cat.pk }}">{{ cat.category_name }}</option>
+            {# <option value="{{ cat.pk }}">{{ cat.category_name }}</option> #}
+            <option value="{{ cat.pk }}">{% if cat.category_parent %}{{ cat.category_parent.category_name }}/{% endif %}{{ cat.category_name }}</option>
             {% endfor %}
           </select>
         </div>
@@ -81,7 +91,8 @@
           <label for="cat-select">Select Category</label>
           <select name="cat" class="form-control" id="cat-select">
             {% for cat in categories %}
-            <option value="{{ cat.pk }}">{{ cat.category_name }}</option>
+            {# <option value="{{ cat.pk }}">{{ cat.category_name }}</option> #}
+            <option value="{{ cat.pk }}">{% if cat.category_parent %}{{ cat.category_parent.category_name }}/{% endif %}{{ cat.category_name }}</option>
             {% endfor %}
           </select>
         </div>
@@ -112,7 +123,8 @@
           <label for="entr-cat">Entry Category</label>
           <select name="ecat" class="form-control" id="entr-cat">
             {% for cat in categories %}
-            <option value="{{ cat.pk }}">{{ cat.category_name }}</option>
+            {# <option value="{{ cat.pk }}">{{ cat.category_name }}</option> #}
+            <option value="{{ cat.pk }}">{% if cat.category_parent %}{{ cat.category_parent.category_name }}/{% endif %}{{ cat.category_name }}</option>
             {% endfor %}
           </select>
         </div>
@@ -144,7 +156,8 @@
           <select name="cat" class="form-control" id="cat-select">
             <option value="-1">None</option>
             {% for cat in categories %}
-            <option value="{{ cat.pk }}">{{ cat.category_name }}</option>
+            {# <option value="{{ cat.pk }}">{{ cat.category_name }}</option> #}
+            <option value="{{ cat.pk }}">{% if cat.category_parent %}{{ cat.category_parent.category_name }}/{% endif %}{{ cat.category_name }}</option>
             {% endfor %}
           </select>
         </div>
@@ -165,7 +178,8 @@
           <select name="cat" class="form-control" id="cat-select">
             <option value="-1">None</option>
             {% for cat in categories %}
-            <option value="{{ cat.pk }}">{{ cat.category_name }}</option>
+            {# <option value="{{ cat.pk }}">{{ cat.category_name }}</option> #}
+            <option value="{{ cat.pk }}">{% if cat.category_parent %}{{ cat.category_parent.category_name }}/{% endif %}{{ cat.category_name }}</option>
             {% endfor %}
           </select>
         </div>

@@ -1,4 +1,6 @@
 {% extends 'home/base.html' %}
+{% load get_at_index %}
+
 {% load static %}
 
 {% block title %}Thermometriemuseum Geraberg{% endblock %}
@@ -15,6 +17,27 @@
   <h6>Header 6</h6>
   <p>Paragraph</p>
   -->
+
+  {% if sub_cat_len > 0 %}
+  <h3>Subcategories</h3>
+  <div class="row">
+    {% for cat in sub_categories %}
+    <div class="col-4">
+      <div class="card">
+        <div class="card-body" style="padding: 1vw; border-bottom: 1px solid #eee; margin-bottom: 4px">
+          <!--<a href="{% url 'home:category_view' cat.id %}">-->
+            <h4 style="margin: 0">{{ cat.category_name }}</h4>
+          <!--</a>-->
+        </div> <!-- card-header -->
+        <a href="{% url 'home:category_view' cat.id %}">
+          <img class="card-img-top" src="{{ category_images|get_at_index:forloop.counter0 }}">
+        </a>
+      </div> <!-- card -->
+    </div> <!-- col -->
+    {% endfor %}
+  </div>
+  <br><br>
+  {% endif %}
 
   {% if video_len > 0 %}
   <h3>Videos</h3>
