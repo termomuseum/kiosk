@@ -5,7 +5,7 @@ from django.contrib.auth.models import User, Group
 from django.contrib.auth import login, logout, authenticate 
 from .models import GalleryEntry, GalleryEntryCategory, GalleryEntryCategoryImage, GalleryEntryType
 from PyPDF2 import PdfFileReader
-
+import os
 
 
 # Renders a main gallery page
@@ -282,6 +282,10 @@ def editor(request):
       # Getting entry pk and deleting it
       entry_pk = request.POST.get("epk")
       entry = GalleryEntry.objects.get(id=entry_pk)
+      
+      entry.entry_file_url
+      val = f'media/{entry.entry_file_url}'
+      os.remove(val)
       entry.delete()
     
       show_success = True
