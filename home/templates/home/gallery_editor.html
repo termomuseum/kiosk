@@ -10,9 +10,9 @@
 
 {% block content %}
   {% if user.is_authenticated %}
-    <h2>{{ user.username }} logged in.</h2>
+  <h2>{{ user.username }} logged in. <a href="{% url 'home:user_logout' %}">Log out</a>.</h2>
   {% else %}
-    <h2>You're logged out. Please, <a href="#">log in</a>.</h2>
+  <h2>You're logged out. Please, <a href="{% url 'home:user_login' %}">log in</a>.</h2>
   {% endif %}
 
   {% if user.is_superuser %}

@@ -1,8 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.core.files.storage import FileSystemStorage
 from django.contrib.auth.models import User, Group
-from django.contrib.auth import login, authenticate 
+from django.contrib.auth import login, logout, authenticate 
 from .models import GalleryEntry, GalleryEntryCategory, GalleryEntryCategoryImage, GalleryEntryType
 from PyPDF2 import PdfFileReader
 
@@ -361,3 +361,31 @@ def editor_add_new_entry(ename, etype, ecat, efile_url, edesc, efdesc):
     entry_desc=edesc,
     entry_desc_full=efdesc
     )
+
+
+
+def user_login(request):
+  if request.method == "POST":
+    username = request.POST.get("username")
+    password = request.POST.get("password")
+
+    user = authenticate(username=username, password=password)
+    if user is not None:
+      # Authentication successful!
+      print("OK!")
+      print(user.is_superuser)
+      # Do a logging in
+      login(request, user)
+      # Redirect to editor
+      return redirect('/editor/')
+    else:
+      # Add a error to a template
+      print("Error!")
+
+  return render(request, 'home/user_login.html', context={})
+
+
+def user_logout(request):
+  logout(request)
+  return redirect("/editor/")
+

@@ -15,8 +15,9 @@ urlpatterns = [
     path('gallery_image/',views.gallery_image,name='image_view'),
     re_path('gallery_presentation/(?P<pk>\d+)/',views.gallery_presentation,name='presentation'),
     path('gallery_presentation/',views.gallery_presentation,name='presentation_view'),
-    path('editor/', views.editor, name="gallery_editor")
-
+    path('editor/', views.editor, name="gallery_editor"),
+    path('login/', views.user_login, name="user_login"),
+    path('logout/', views.user_logout, name="user_logout"),
     # + static... is added to allow media files to
     # be accessed by user or views
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
