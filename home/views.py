@@ -283,7 +283,7 @@ def editor(request):
       entry_pk = request.POST.get("epk")
       entry = GalleryEntry.objects.get(id=entry_pk)
 
-      val = f'media/{entry.entry_file_url}'
+      val = 'media/{}'.format(entry.entry_file_url)
       os.remove(val)
       entry.delete()
     
@@ -322,7 +322,7 @@ def editor(request):
       # Deleting category and entries
       selected_cat.delete()
       for e in entries:
-        val = f'media/{e.entry_file_url}'
+        val = 'media/{}'.format(entry.entry_file_url)
         os.remove(val)
         e.delete()
       
