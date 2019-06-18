@@ -346,11 +346,7 @@ def editor(request):
       # Deleting category and entries
       selected_cat.delete()
       for e in entries:
-<<<<<<< HEAD
         val = 'media/{}'.format(e.entry_file_url)
-=======
-        val = 'media/{}'.format(entry.entry_file_url)
->>>>>>> b09c6548a7bc3d08e6ff94b3e60b0941aada00b6
         os.remove(val)
         e.delete()
       
