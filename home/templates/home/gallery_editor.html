@@ -9,6 +9,13 @@
 {% block disable-drag %}disable{% endblock %}
 
 {% block content %}
+  {% if user.is_authenticated %}
+    <h2>{{ user.username }} logged in.</h2>
+  {% else %}
+    <h2>You're logged out. Please, <a href="#">log in</a>.</h2>
+  {% endif %}
+
+  {% if user.is_superuser %}
   {% if show_debug %}
   <div class="alert alert-info">
     <h5>Debug Info:</h5>
@@ -166,5 +173,6 @@
       </form>
     </div>
   </div>
+  {% endif %}
 {% endblock %}
 {% load static %}

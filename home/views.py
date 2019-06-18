@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.core.files.storage import FileSystemStorage
+from django.contrib.auth.models import User, Group
+from django.contrib.auth import login, authenticate 
 from .models import GalleryEntry, GalleryEntryCategory, GalleryEntryCategoryImage, GalleryEntryType
 from PyPDF2 import PdfFileReader
 
