@@ -48,6 +48,22 @@ def gallery_category(request, pk=None):
 
   # Getting all of the objects in a category
   category = GalleryEntryCategory.objects.get(id=pk)
+  # Getting category subcategories
+  sub_categories = GalleryEntryCategory.objects.filter(
+      category_parent=category)
+
+  category_images = GalleryEntryCategoryImage.objects.all()
+  cat_images_ordered = []
+  for cat in sub_categories:
+    found_img = False
+    for cat_img in category_images:
+      if cat_img.category == cat:
+        cat_images_ordered.append("media/" + str(cat_img.category_image))
+        found_img = True
+    if found_img == False:
+      cat_images_ordered.append("/static/home/img/cat-icon.png")
+      pass
+  
   video_objects = GalleryEntry.objects.filter(
       entry_category=category).filter(
           entry_type__type_name='Video')
@@ -60,6 +76,9 @@ def gallery_category(request, pk=None):
 
   context = {
         "category_name": category.category_name,
+        "sub_cat_len": len(sub_categories),
+        "sub_categories": sub_categories,
+        "category_images": cat_images_ordered,
         "video_objects": video_objects,
         "video_len": len(video_objects),
         "image_objects": image_objects,
@@ -150,7 +169,12 @@ def editor(request):
     try:
       # getting category name and create it
       category_name = request.POST.get("cname", "None")
-      editor_add_new_category(category_name)
+      category_parent_pk = int(request.POST.get("cpar", 0))
+      category_parent = None
+      if category_parent_pk != 0:
+        category_parent = GalleryEntryCategory.objects.get(id=category_parent_pk)
+      
+      editor_add_new_category(category_name, category_parent)
 
       show_success = True
       success_msg = "Category '{}' added successfuly. \n".format(category_name)
@@ -322,7 +346,7 @@ def editor(request):
       # Deleting category and entries
       selected_cat.delete()
       for e in entries:
-        val = 'media/{}'.format(entry.entry_file_url)
+        val = 'media/{}'.format(e.entry_file_url)
         os.remove(val)
         e.delete()
       
@@ -352,8 +376,11 @@ def editor(request):
 
 
 
-def editor_add_new_category(cname):
-  GalleryEntryCategory.objects.create(category_name=cname)
+def editor_add_new_category(cname, parent):
+  if parent != None:
+    GalleryEntryCategory.objects.create(category_name=cname, category_parent=parent)
+  else:
+    GalleryEntryCategory.objects.create(category_name=cname)
 
 
 

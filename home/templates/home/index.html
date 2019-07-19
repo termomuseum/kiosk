@@ -10,6 +10,9 @@
 {% block content %}
   <div class="row" style="margin-top: 50px">
   {% for cat in categories %}
+  {% if cat.category_parent %}
+    <!-- Category has a parent -->
+  {% else %}
   <div class="col-4">
     <div class="card">
       <div class="card-body" style="padding: 1vw; border-bottom: 1px solid #eee; margin-bottom: 4px">
@@ -22,6 +25,7 @@
       </a>
     </div> <!-- card -->
   </div> <!-- col -->
+  {% endif %}
   {% endfor %}
   </div> <!-- row -->
 {% endblock %}
